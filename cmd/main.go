@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/coder/websocket"
+    "nhooyr.io/websocket"
 	camera "rascam-web/internal"
 )
 
