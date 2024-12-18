@@ -62,7 +62,7 @@ func (s *server) subscribe(ctx context.Context, w http.ResponseWriter, r *http.R
 	if err != nil {
 		return err
 	}
-	defer c.CloseNow()
+	defer c.Close(websocket.StatusAbnormalClosure, "goodbye")
 
 	ctx = c.CloseRead(ctx)
 	for {
