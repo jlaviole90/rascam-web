@@ -1,5 +1,5 @@
 module rascam-web
 
-go 1.23
+go 1.15
 
-require github.com/coder/websocket v1.8.12 // indirect
+require github.com/coder/websocket v1.8.12
