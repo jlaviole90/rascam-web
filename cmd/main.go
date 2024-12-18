@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"image"
 	"image/jpeg"
 	"net/http"
 	"os"
@@ -95,27 +93,13 @@ func main() {
 
 	go func(s *server) {
 		for {
-			frame, err := camera.Capture()
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-
-			img, _, err := image.Decode(bytes.NewReader(frame))
-			if err != nil {
-				fmt.Println(err)
-			}
-
-			out, _ := os.Create("../data/frame.jpg")
+            if err := camera.Capture(); err != nil {
+                fmt.Println(err)
+                continue
+            }
 
 			var opts jpeg.Options
 			opts.Quality = 1
-
-			err = jpeg.Encode(out, img, &opts)
-			if err != nil {
-				fmt.Println(err)
-			}
-			out.Close()
 
 			timeStamp := time.Now().Format(time.RFC3339)
 			msg := []byte(`
